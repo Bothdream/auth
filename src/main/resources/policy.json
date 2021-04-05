@@ -1,0 +1,9 @@
+[{
+  "policId": "sfdhjhfw3rwe809",
+  "mark": "管理員",
+  "power": ["POST:/users/add"]
+},{
+  "policId": "asdfsadfsdf",
+  "mark": "遊客",
+  "power": ["POST:/role/add"]
+}]
