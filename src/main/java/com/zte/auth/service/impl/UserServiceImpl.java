@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class IUserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserDao userDao;
 
-    private static Logger logger = LoggerFactory.getLogger(IUserServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;

@@ -4,5 +4,5 @@ import com.zte.auth.service.IPermissionService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class IPermissionServiceImpl implements IPermissionService {
+public class PermissionServiceImpl implements IPermissionService {
 }

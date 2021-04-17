@@ -6,6 +6,7 @@ import com.zte.auth.entity.User;
 import com.zte.auth.service.IUserService;
 import com.zte.auth.utils.DateUtil;
 import com.zte.auth.utils.ExeclUtil;
+import com.zte.auth.utils.I18nUtils;
 import com.zte.auth.utils.dto.ExcelTableExportParams;
 import com.github.jsonzou.jmockdata.JMockData;
 import io.swagger.annotations.Api;
@@ -34,6 +35,10 @@ public class UserController {
     @GetMapping(value = "/add")
     @ResponseBody
     public ServiceData<List<User>> addUser(){
+        String msg = I18nUtils.get("user.title");
+        String mg = I18nUtils.get("gh", new String[]{"123", "123"});
+        System.out.println(msg);
+        System.out.println(mg);
         ServiceData<List<User>> data = new ServiceData<>();
         List<User> users = userService.listUser();
         data.setBo(users);
