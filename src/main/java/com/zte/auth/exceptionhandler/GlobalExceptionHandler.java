@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,8 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    public ServiceData<Object> handleRuntimeException(RuntimeException e){
+    @ExceptionHandler(ValidationException.class)
+    public ServiceData<Object> handleRuntimeException(ValidationException e){
         RetCode retCode = new RetCode();
         retCode.setCode(RetCode.BUSINESS_ERROR_MSG_CODE);
         retCode.setMsg(e.getMessage());

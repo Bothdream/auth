@@ -18,6 +18,10 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
+        //注册多个拦截器 拦截规则
+        // 多个拦截器时，依次添加，执行顺序按添加顺序
+        registry.addInterceptor(interceptor).addPathPatterns("/user/**");
         registry.addInterceptor(interceptor).addPathPatterns("/user/**");
     }
 }

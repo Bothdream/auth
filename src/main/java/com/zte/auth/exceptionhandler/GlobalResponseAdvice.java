@@ -24,6 +24,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
      */
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
+        //此处进行拦击以后，openapi 将无法使用
         return false;
     }
 

@@ -27,9 +27,6 @@
         <if test="id != null">
             and id = #{id}
         </if>
-        <if test="name != null and name != ''">
-              name like #{name,jdbcType=VARCHAR}
-        </if>
    </select>
     <insert id="insert">
         insert into
