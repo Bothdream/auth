@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zte.auth.dao.UserDao">
     <resultMap id="userMap" type="com.zte.auth.entity.User">
-        <id property="userId" column="user_id" jdbcType="BIGINT"/>
-        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <id property="id" column="user_id" jdbcType="BIGINT"/>
+        <result property="name" column="user_name" jdbcType="VARCHAR"/>
         <result property="creationDate" column="creation_date" jdbcType="TIMESTAMP"/>
         <result property="enabledFlag" column="enabled_flag" jdbcType="VARCHAR"/>
         <result property="lastUpdatedDate" column="last_updated_date" jdbcType="TIMESTAMP"/>
@@ -15,8 +15,8 @@
 <!--不使用@Param注解时，最好传递 Javabean。在SQL语句里就可以直接引用JavaBean的属性，而且只能引用JavaBean存在的属性。-->
    <select id="listUser" resultMap="userMap" resultType="com.zte.auth.entity.User">
        select
-           user_id,
-           user_name,
+           id,
+           name,
            creation_date,
            enabled_flag,
            last_updated_date
@@ -24,16 +24,16 @@
             t_user
         where
             enabled_flag = 'Y'
-        <if test="userId != null">
-            and user_id = #{userId}
+        <if test="id != null">
+            and id = #{id}
         </if>
-        <if test="userName != null and userName != ''">
-              user_name like #{userName,jdbcType=VARCHAR}
+        <if test="name != null and name != ''">
+              name like #{name,jdbcType=VARCHAR}
         </if>
    </select>
     <insert id="insert">
         insert into
-            t_user (user_name,
+            t_user (name,
                    enabled_flag,
                    creation_date,
                    last_updated_date)

@@ -27,8 +27,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public  List<User> listUser(){
       User user = new User();
-      user.setUserId(2L);
-      user.setUserName("李四");
+      user.setId(2L);
+      user.setName("李四");
       return  userDao.listUser(user);
     }
 
