@@ -78,6 +78,12 @@
 		</dependency>
 		<!--  easy-poi  -->
 
+<!-- 分布式事务插件 jta -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jta-atomikos</artifactId>
+		</dependency>
+
 		<!--  加载 springboot redis 包  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
