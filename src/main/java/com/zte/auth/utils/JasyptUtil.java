@@ -2,6 +2,9 @@ package com.zte.auth.utils;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
+/**
+ * 加解密算法工具
+ */
 public class JasyptUtil {
 
     public static void main(String[] args) {

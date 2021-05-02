@@ -1,19 +1,21 @@
 package com.zte.auth.aop;
 
-import com.zte.auth.aop.annotation.QsmSpecifiedSelector;
+import com.zte.auth.aop.annotation.SpecifiedSelector;
 import lombok.SneakyThrows;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 
-public class QsmSpecifiedValidator implements ConstraintValidator<QsmSpecifiedSelector, Object> {
+public class SpecifiedValidator implements ConstraintValidator<SpecifiedSelector, Object> {
     private String[] strValues;
     private int[] intValues;
     private Class<?> cls;
 
     @Override
-    public void initialize(QsmSpecifiedSelector constraintAnnotation) {
+    public void initialize(SpecifiedSelector constraintAnnotation) {
         strValues = constraintAnnotation.strValues();
         intValues = constraintAnnotation.intValues();
         cls = constraintAnnotation.enumValue();
@@ -34,11 +36,8 @@ public class QsmSpecifiedValidator implements ConstraintValidator<QsmSpecifiedSe
             }
         } else {
             if (value instanceof String) {
-                for (String s : strValues) {
-                    if (s.equals(value)) {
-                        return true;
-                    }
-                }
+                List<String> list =  Arrays.asList(strValues);
+                return list.contains(value);
             } else if (value instanceof Integer) {
                 for (Integer s : intValues) {
                     if (s == value) {

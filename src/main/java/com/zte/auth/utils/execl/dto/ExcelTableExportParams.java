@@ -1,4 +1,4 @@
-package com.zte.auth.utils.dto;
+package com.zte.auth.utils.execl.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

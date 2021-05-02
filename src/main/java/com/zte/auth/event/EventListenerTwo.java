@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class EventListener2 implements ApplicationListener<MyEvent> {
+public class EventListenerTwo implements ApplicationListener<CustomEvent> {
 
     @Override
-    public void onApplicationEvent(MyEvent event) {
+    public void onApplicationEvent(CustomEvent event) {
         log.info(event.getSource().toString());
     }
 }

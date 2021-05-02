@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * 返回给前端的响应格式处理器
+ */
 @Service
 public class ResponseToXlsConverter extends AbstractHttpMessageConverter {
     @Override

@@ -17,7 +17,7 @@ import java.util.Set;
  * 自定义的拦截器
  */
 @Component
-public class TestInterceptor implements HandlerInterceptor {
+public class CustomInterceptor implements HandlerInterceptor {
     @Autowired
     private PolicyServiceImpl policyService;
 
@@ -30,7 +30,6 @@ public class TestInterceptor implements HandlerInterceptor {
        HttpSession httpSession = request.getSession();
        System.out.println(httpSession.toString());
        Policy p = policyService.getPolicyById("sfdhjhfw3rwe809");
-//       Policy p = policyService.getPolicyById("1");
        if (null == p) {
             throw new Exception("無權限");
        } else {

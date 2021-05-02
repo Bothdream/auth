@@ -1,6 +1,6 @@
 package com.zte.auth.aop.annotation;
 
-import com.zte.auth.aop.QsmSpecifiedValidator;
+import com.zte.auth.aop.SpecifiedValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -23,10 +23,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  public class MyValidDTO {
  *     @QsmSpecifiedSelector(strValues = {"qsm", "hn"}, message = "姓名必须为指定值qsm,hn")
  *     private String name;
- *
  *     @QsmSpecifiedSelector(intValues = {0, 1}, message = "学生标志必须为指定值0,1")
  *     private Integer studentFlag;
- *
  *     @QsmSpecifiedSelector(enumValue = SspClaimEnum.Nation.class, message = "国家必须为指定值a,b")
  *     private String nation;
  * }
@@ -36,9 +34,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {QsmSpecifiedValidator.class})
-@Repeatable(QsmSpecifiedSelector.List.class)
-public @interface QsmSpecifiedSelector {
+@Constraint(validatedBy = {SpecifiedValidator.class})
+@Repeatable(SpecifiedSelector.List.class)
+public @interface SpecifiedSelector {
     //默认错误消息
     String message() default "必须为指定值";
 
@@ -60,6 +58,6 @@ public @interface QsmSpecifiedSelector {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        QsmSpecifiedSelector[] value();
+        SpecifiedSelector[] value();
     }
 }

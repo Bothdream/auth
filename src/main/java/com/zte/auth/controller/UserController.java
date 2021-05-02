@@ -1,66 +1,46 @@
 package com.zte.auth.controller;
 
-import com.github.jsonzou.jmockdata.JMockData;
 import com.zte.auth.aop.annotation.CheckRequestParameter;
-import com.zte.auth.dao.auth.UserDao;
-import com.zte.auth.dao.order.OrderDao;
-import com.zte.auth.entity.Order;
 import com.zte.auth.entity.User;
-import com.zte.auth.event.MyEvent;
 import com.zte.auth.service.IUserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
 
 
 @RestController
 @RequestMapping(value = "/api")
+@Slf4j
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private ApplicationContext applicationContext;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @GetMapping(value = "/users")
-    public User getUser(ServletRequest servletRequest){
+    public User getUser(){
         User user = new User();
         user.setId(123L);
         user.setName("zhangsan");
         user.setEnabledFlag("1");
-        servletRequest.setAttribute("123",123);
-        servletRequest.removeAttribute("123");
-        applicationContext.publishEvent(new MyEvent("1234567"));
         return user;
     }
 
     @PutMapping(value = "/users")
-    public void deleteUser(){
+    public void putUser(){
 
     }
 
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private OrderDao orderDao;
-
     @DeleteMapping(value = "/users")
-    public void updateUser(){
-        User user = JMockData.mock(User.class);
-        Order order = JMockData.mock(Order.class);
-        order.setCreateTime(new Date());
-        userDao.insert(user);
-        orderDao.insertOrder(order);
+    public void deleteUser(){
+
     }
 
     @PostMapping(value = "/users")

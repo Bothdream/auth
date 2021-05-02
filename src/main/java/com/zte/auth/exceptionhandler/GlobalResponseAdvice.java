@@ -28,6 +28,9 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
         return false;
     }
 
+    /**
+     * 返回前端做最后一步拦截，可以新增一些参数
+     */
     @Override
     public Object beforeBodyWrite(Object o,
                                   MethodParameter methodParameter,

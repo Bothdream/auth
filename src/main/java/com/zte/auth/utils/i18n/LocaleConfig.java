@@ -1,4 +1,4 @@
-package com.zte.auth.config;
+package com.zte.auth.utils.i18n;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

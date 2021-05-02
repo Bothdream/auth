@@ -8,10 +8,13 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * 校验请求参数的切面
+ */
 @Aspect
 @Component
 @Slf4j
-public class CheckAop {
+public class CheckRequestParameterAop {
 
     @Pointcut("@annotation(com.zte.auth.aop.annotation.CheckRequestParameter)")
     public void pointcut(){}
@@ -22,7 +25,7 @@ public class CheckAop {
        for (Object  item : parameter) {
            if (item instanceof Verifiable) {
                Verifiable temp = (Verifiable)item;
-               temp.check();
+               temp.verify();
            }
        }
     }

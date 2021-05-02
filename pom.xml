@@ -120,6 +120,7 @@
 			<artifactId>jmockdata</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+
 <!--		fastjson 依赖-->
 		<dependency>
 			<groupId>com.alibaba</groupId>

@@ -1,4 +1,4 @@
-package com.zte.auth.utils;
+package com.zte.auth.common.constants;
 
 public class SpecialConstants {
     private SpecialConstants() throws IllegalAccessException {

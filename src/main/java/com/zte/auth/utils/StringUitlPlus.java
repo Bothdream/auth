@@ -1,5 +1,6 @@
 package com.zte.auth.utils;
 
+import com.zte.auth.common.constants.SpecialConstants;
 import org.apache.commons.lang3.StringUtils;
 
 /**

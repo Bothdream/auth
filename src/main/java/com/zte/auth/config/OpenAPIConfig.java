@@ -59,5 +59,17 @@ public class OpenAPIConfig {
                 .pathsToMatch("/**/permissions/**")
                 .build();
     }
+
+
+    /**
+     * 测试接口的API
+     */
+    @Bean
+    public GroupedOpenApi testApi(){
+        return GroupedOpenApi.builder()
+                .group("test-api")
+                .pathsToMatch("/**/tests/**")
+                .build();
+    }
 }
 

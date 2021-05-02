@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class EventListener1 {
+public class EventListenerOne {
     @EventListener
-    public void listener(MyEvent myEvent) {
-        log.info(myEvent.getSource().toString());
+    public void listener(CustomEvent customEvent) {
+        log.info(customEvent.getSource().toString());
     }
 }
