@@ -1,7 +1,7 @@
 package com.zte.auth.service.impl;
 
 import com.zte.auth.entity.User;
-import com.zte.auth.dao.UserDao;
+import com.zte.auth.dao.auth.UserDao;
 import com.zte.auth.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

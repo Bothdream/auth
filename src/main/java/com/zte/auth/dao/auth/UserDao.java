@@ -1,4 +1,4 @@
-package com.zte.auth.dao;
+package com.zte.auth.dao.auth;
 
 import com.zte.auth.entity.User;
 import org.apache.ibatis.annotations.Param;
@@ -11,5 +11,5 @@ public interface UserDao {
 
     List<User> listUser(User user);
 
-    int insert(@Param("username") String username);
+    int insert(User user);
 }

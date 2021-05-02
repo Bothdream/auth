@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zte.auth.dao.order.OrderDao">
+    <resultMap id="orderMap" type="com.zte.auth.entity.Order">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="listOrder" resultMap="orderMap" resultType="com.zte.auth.entity.Order">
+        select
+        id,
+        product_name,
+        create_time
+        from
+        t_order
+        where
+            product_name = #{name}
+    </select>
+
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into
+             t_order (id,
+                   product_name,
+                   create_time)
+        values (
+                   #{id},
+                   #{productName},
+                   #{createTime});
+    </insert>
+</mapper>

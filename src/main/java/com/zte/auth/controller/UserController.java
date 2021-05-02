@@ -1,6 +1,10 @@
 package com.zte.auth.controller;
 
+import com.github.jsonzou.jmockdata.JMockData;
 import com.zte.auth.aop.annotation.CheckRequestParameter;
+import com.zte.auth.dao.auth.UserDao;
+import com.zte.auth.dao.order.OrderDao;
+import com.zte.auth.entity.Order;
 import com.zte.auth.entity.User;
 import com.zte.auth.event.MyEvent;
 import com.zte.auth.service.IUserService;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 
 
 @RestController
@@ -43,9 +48,19 @@ public class UserController {
 
     }
 
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private OrderDao orderDao;
+
     @DeleteMapping(value = "/users")
     public void updateUser(){
-
+        User user = JMockData.mock(User.class);
+        Order order = JMockData.mock(Order.class);
+        order.setCreateTime(new Date());
+        userDao.insert(user);
+        orderDao.insertOrder(order);
     }
 
     @PostMapping(value = "/users")
