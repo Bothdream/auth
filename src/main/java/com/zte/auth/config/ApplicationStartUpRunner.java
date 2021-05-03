@@ -5,6 +5,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
 @Slf4j
 public class ApplicationStartUpRunner implements ApplicationRunner {
@@ -16,7 +18,8 @@ public class ApplicationStartUpRunner implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        log.info("#############1#############");
-        log.info(args.getSourceArgs().toString());
+        log.info("#############ApplicationArguments#############");
+        System.out.println(Arrays.asList(args.getSourceArgs()));
+        log.info("#############ApplicationArguments#############");
     }
 }
