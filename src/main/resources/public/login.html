@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<body>
+<h1>字母哥业务系统登录</h1>
+<form action="/login" method="post">
+    <span>用户名称</span><input type="text" name="username" id="username"/> <br>
+    <span>用户密码</span><input type="password" name="password" id="password"/> <br>
+    <input type="button" onclick="login()" value="登陆">
+</form>
+<script type="text/javascript">
+  function login() {
+    var  username = $("#username").val();
+    var password =  $("#password").val();
+    if (username === "" || password === "") {
+        alert('用户名或密码不能为空');
+        return
+    }
+    $.ajax({
+        type:"POST",
+        url:"/login",
+        data:{
+            "username":username,
+            "password":password
+        },
+        success:function (json) {
+            if (json.code === '000') {
+                window.location.href = "/";
+            } else {
+                alert(json.msg);
+            }
+        }
+    });
+
+  }
+</script>
+</body>
+</html>
