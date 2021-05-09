@@ -1,6 +1,7 @@
 package com.zte.auth.config;
 
 import com.zte.auth.config.authenticationhandler.CustomExpiredSessionStrategy;
+import com.zte.auth.config.authenticationhandler.CustomUserDetailService;
 import com.zte.auth.config.authenticationhandler.LoginFailHandler;
 import com.zte.auth.config.authenticationhandler.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private CustomExpiredSessionStrategy customExpiredSessionStrategy;
 
+    @Resource
+    private CustomUserDetailService customUserDetailService;
+
     @Override
     public void configure(HttpSecurity http) throws Exception{
         http.csrf().disable()
@@ -35,19 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login") // 登录表单中action的地址，即处理认证请求的路径
                 .passwordParameter("password") // form表单密码输入框的参数名
                 .usernameParameter("username") // form表单用户名输入框的参数名
-//                .defaultSuccessUrl("/")// 登录成功后默认跳转的路径
                 .successHandler(loginSuccessHandler) // 自定义登录成功的处理逻辑
                 .failureHandler(loginFailHandler)//自定义登录失败的处理逻辑
                 .and()
                 .authorizeRequests()
                     .antMatchers("/login.html","/login").permitAll()
-                    .antMatchers("/","/biz1","/biz2")
-                            .hasAnyAuthority("ROLE_user","ROLE_admin")
-                    .antMatchers("/syslog")
-                            .hasAnyAuthority("sys:log")
-                    .antMatchers("/sysuser")
-                            .hasAnyAuthority("sys:user")
-                .anyRequest().authenticated()
+                .anyRequest().access("@customRbacService.hasPermission(request,authentication)")// 动态加载资源鉴权规则
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .sessionFixation().migrateSession()
@@ -56,17 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .expiredSessionStrategy(customExpiredSessionStrategy); //sesscion超时的处理策略
     }
 
-
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("123456"))
-                .authorities("ROLE_user")
-          .and().withUser("admin")
-                .password(passwordEncoder().encode("123456"))
-                .authorities("sys:log","sys:user","ROLE_admin")
-          .and().passwordEncoder(passwordEncoder()); //配置加密的算法
+        auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
