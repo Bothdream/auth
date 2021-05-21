@@ -7,7 +7,6 @@ import com.zte.auth.dao.order.OrderDao;
 import com.zte.auth.entity.Order;
 import com.zte.auth.entity.User;
 import com.zte.auth.event.CustomEvent;
-import com.zte.auth.service.ITestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -26,9 +25,6 @@ import java.util.Date;
 @RequestMapping("/api")
 @Slf4j
 public class TestController {
-
-    @Autowired
-    private ITestService testService;
 
     @Autowired
     private UserDao userDao;

@@ -42,7 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception{
-        http
+            http.logout() // 退出功能的相关配置
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login.html")
+                    .deleteCookies("JSESSIONID")
+                .and()
                 .rememberMe() //记住密码功能配置
                     .rememberMeParameter("remember-me")
                     .rememberMeCookieName("cccxx")
@@ -60,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(loginFailHandler)//自定义登录失败的处理逻辑
                 .and() // 权限过滤配置
                     .authorizeRequests()
-                    .antMatchers("/login.html","/login")
+                    .antMatchers("/login.html","/login","/v3/**","/swagger-ui/**","/api-docs/**")
                     .permitAll()
                     .anyRequest()
                     .access("@customRbacService.hasPermission(request,authentication)")// 动态加载资源鉴权规则

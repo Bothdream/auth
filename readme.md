@@ -103,7 +103,18 @@ server.servlet.session.cookie.secure=true
 * 共享session存储验证码：负载均衡多个应用实例
 
 ### JWT token
-
+两步
+*  根据用户名和密码换取token
+   UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username,password)
+   Authentication authentication = authenticationManager.authenticate(upToken); 
+   根据jwt工具生成token
+* 调用接口验证token是否合法
+   获取权限信息，将权限和用户信息放在上下文中。
+      UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities())
+      SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+  配置：
+  http.addFilterBefore(jwtAuthenticationToken,UsernamePasswordAuthenticationFilter.class)
+      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)   
 
 ## @RestController和@Controller
 @RestController注解相当于@ResponseBody ＋ @Controller合在一起的作用。
@@ -112,3 +123,12 @@ server.servlet.session.cookie.secure=true
    如果需要返回JSON，XML或自定义mediaType内容到页面，则需要在对应的方法上加上@ResponseBody注解。
 1.使用@Controller 注解，在对应的方法上，视图解析器可以解析return 的jsp,html页面，并且跳转到相应页面
 若返回json等内容到页面，则需要加@ResponseBody注解
+
+## 登录认证基于过滤器链
+-->  SecurityContextPersistenceFilter
+     --> BasicAuthenticationFilter
+     --> UsernamePasswordAuthenticationFilter
+     --> RememberMeAuthenticationFilter
+         --> ExceptionTranslationFilter
+             --> FilterSecurityInterceptor
+                 --> Controller API 
